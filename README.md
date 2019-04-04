@@ -18,3 +18,9 @@ How to add marker on the map
 - After adding marker you will see the immidiate marker on the page and that will be stored on backend
 - You will can now edit or delete the marker
 - Edit have the same process as creating marker, you can save or delete it
+
+
+**
+The application has a draft mode, when you pressed on edit or add button the app will go on draft mode and you will be only able to update the current selected marker and others will be disabled.
+To seprate out the Editing marker, I have kept it with different color(orange) to identify it as a seprate marker from the others.
+**
