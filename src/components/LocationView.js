@@ -4,10 +4,9 @@ import AutoComplete from '../containers/AutoComplete';
 import s from './styles';
 
 export default class LocationView extends Component {
-
   renderActionsButtons = (deleteLocation, disabled, setEditMode) => (
     <div className={s.actionsWrapper}>
-      <Button onClick={() => setEditMode()} disabled={disabled}>
+      <Button onClick={setEditMode} disabled={disabled}>
         Edit
       </Button>
       <p className={s.separator}>or</p>
@@ -17,10 +16,10 @@ export default class LocationView extends Component {
     </div>
   )
 
-  renderDraftActionButton = (deleteLocationFromList, createLocationOnServer) => (
+  renderDraftActionButton = (deleteLocationFromList, createLocationOnServer, updateLocationOnServer) => (
     <div className={s.actionsWrapper}>
-      <Button onClick={createLocationOnServer}>
-        Save
+      <Button onClick={this.props.location.isUpdating ? updateLocationOnServer : createLocationOnServer}>
+        {this.props.location.isUpdating ? 'Update' : 'Save'}
       </Button>
       <p className={s.separator}>or</p>
       <Button onClick={deleteLocationFromList}>
@@ -36,7 +35,8 @@ export default class LocationView extends Component {
       deleteLocationFromList,
       editLocation,
       createLocationOnServer,
-      setEditMode
+      setEditMode,
+      updateLocationOnServer
     } = this.props;
     const disabled = !!editLocation;
     const isCurrentElementEdited = editLocation && (editLocation.id === location.id);
@@ -53,7 +53,7 @@ export default class LocationView extends Component {
         }
         {!editLocation && this.renderActionsButtons(deleteLocation, disabled, setEditMode)}
         {isCurrentElementEdited
-          && this.renderDraftActionButton(deleteLocationFromList, createLocationOnServer)}
+          && this.renderDraftActionButton(deleteLocationFromList, createLocationOnServer, updateLocationOnServer)}
       </div>
     );
   }

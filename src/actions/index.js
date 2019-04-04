@@ -33,13 +33,22 @@ export const createLocationToLocal = (oldId, location) => ({
   type: 'CREATE_LOCATION_ON_SERVER',
   id: oldId,
   location,
-  isDraftModeOn: false
+  isDraftModeOn: false,
+  isUpdating: false
+});
+
+export const updateLocationOnServer = (id) => ({
+  type: 'UPDATE_LOCATION_ON_SERVER',
+  id,
+  isDraftModeOn: false,
+  isUpdating: false
 });
 
 export const setEditModeOn = id => ({
   type: 'SET_EDIT_MODE_ON',
   id,
-  isDraftModeOn: true
+  isDraftModeOn: true,
+  isUpdating: true
 });
 
 export const failedToCreateLocation = id => ({

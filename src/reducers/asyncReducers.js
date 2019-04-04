@@ -2,14 +2,17 @@ import {
   getAllLocations,
   deleteLocation,
   createLocation as createLocationOnServer,
-  fetchAddressForLatLong
+  fetchAddressForLatLong,
+  editLocation
 } from '../utils/request';
+
 import {
   locationFetch,
   deleteLocationFromList,
   createLocationToLocal,
   updateLocation as updateLocationDetails,
-  failedToCreateLocation
+  failedToCreateLocation,
+  updateLocationOnServer
 } from '../actions';
 import { message } from 'antd';
 
@@ -40,6 +43,13 @@ export function createLocation(location) {
     return createLocationOnServer(rest)
     .then(response => response.json())
     .then(response => dispatch(createLocationToLocal(id, response)));
+  }
+}
+
+export function updateLocationOnExistingData(location) {
+  return function (dispatch) {
+    return editLocation(location)
+    .then((res) => dispatch(updateLocationOnServer(location.id)));
   }
 }
 

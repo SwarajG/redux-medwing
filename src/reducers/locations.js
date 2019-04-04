@@ -10,7 +10,8 @@ const locations = (state = [], action) => {
         if (action.id === location.id) {
           return {
             ...action.location,
-            isDraftModeOn: action.isDraftModeOn
+            isDraftModeOn: action.isDraftModeOn,
+            isUpdating: action.isUpdating
           }
         }
         return location;
@@ -32,12 +33,24 @@ const locations = (state = [], action) => {
         ...state,
         ...action.locations
       ];
+    case 'UPDATE_LOCATION_ON_SERVER':
+      return state.map((location) => {
+        if (action.id === location.id) {
+          return {
+            ...location,
+            isDraftModeOn: action.isDraftModeOn,
+            isUpdating: action.isUpdating
+          }
+        }
+        return location;
+      });
     case 'SET_EDIT_MODE_ON':
       return state.map((location) => {
         if (action.id === location.id) {
           return {
             ...location,
-            isDraftModeOn: true
+            isDraftModeOn: action.isDraftModeOn,
+            isUpdating: action.isUpdating
           }
         }
         return location;

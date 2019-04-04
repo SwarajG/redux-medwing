@@ -8,7 +8,7 @@ const createLocation = location => fetch(`${baseUrl}/locations`, {
   body: JSON.stringify(location)
 });
 
-const editLocation = location => fetch(`${baseUrl}/locations`, {
+const editLocation = location => fetch(`${baseUrl}/locations/${location.id}`, {
   method: methods.PUT,
   ...headers,
   body: JSON.stringify(location)
